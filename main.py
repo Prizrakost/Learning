@@ -1,0 +1,84 @@
+import pygame
+pygame.init()
+win = pygame.display.set_mode((500, 500))
+pygame.display.set_caption("Something")
+
+walkRight = [pygame.image.load('assets/right_1.png'), pygame.image.load('assets/right_2.png')]
+walkLeft = [pygame.image.load('assets/left_1.png'), pygame.image.load('assets/left_2.png')]
+
+# bg = pygame.image.load('bg.jpg')
+playerStand = pygame.image.load('assets/idle.png')
+
+clock = pygame.time.Clock()
+
+width = 32
+height = 32
+x = 250 - width/2
+y = 500 - height
+speed = 10
+
+isJump = False
+jumpCount = 10
+
+left = False
+right = False
+animCount = 0
+
+
+def drawWindow():
+    global animCount
+    win.fill((0, 0, 0))
+    if animCount + 1 >= 10:
+        animCount = 0
+    if left:
+        win.blit(walkLeft[animCount // 5], (x, y))
+        animCount += 1
+    elif right:
+        win.blit(walkRight[animCount // 5], (x, y))
+        animCount += 1
+    else:
+        win.blit(playerStand, (x, y))
+
+    pygame.display.update()
+
+
+run = True
+while run:
+    clock.tick(30)
+    # pygame.time.delay(10)
+
+    for i in pygame.event.get():
+        if i.type == pygame.QUIT:
+            run = False
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_ESCAPE]:
+        run = False
+    if keys[pygame.K_LEFT] and x > 0:
+        x -= speed
+        left = True
+        right = False
+    elif keys[pygame.K_RIGHT] and x < 500 - width:
+        x += speed
+        left = False
+        right = True
+    else:
+        left = False
+        right = False
+        animCount = 0
+    if not isJump:
+        if keys[pygame.K_SPACE]:
+            isJump = True
+    else:
+        if jumpCount >= -10:
+            if jumpCount < 0:
+                y += (jumpCount ** 2) / 2
+            else:
+                y -= (jumpCount ** 2) / 2
+            jumpCount -= 1
+        else:
+            isJump = False
+            jumpCount = 10
+
+    drawWindow()
+
+pygame.quit()
