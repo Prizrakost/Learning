@@ -7,7 +7,8 @@ walkRight = [pygame.image.load('assets/right_1.png'), pygame.image.load('assets/
 walkLeft = [pygame.image.load('assets/left_1.png'), pygame.image.load('assets/left_2.png')]
 
 # bg = pygame.image.load('bg.jpg')
-playerStand = pygame.image.load('assets/idle_right.png')
+playerStandLeft = pygame.image.load('assets/idle_left.png')
+playerStandRight = pygame.image.load('assets/idle_right.png')
 
 clock = pygame.time.Clock()
 
@@ -21,23 +22,31 @@ isJump = False
 jumpCount = 10
 
 left = False
+leftStand = False
+rightStand = True
 right = False
 animCount = 0
 
 
 def drawWindow():
-    global animCount
+    global animCount, leftStand, rightStand
     win.fill((0, 0, 0))
     if animCount + 1 >= 10:
         animCount = 0
     if left:
         win.blit(walkLeft[animCount // 5], (x, y))
         animCount += 1
+        leftStand = True
+        rightStand = False
     elif right:
         win.blit(walkRight[animCount // 5], (x, y))
         animCount += 1
-    else:
-        win.blit(playerStand, (x, y))
+        leftStand = False
+        rightStand = True
+    elif leftStand:
+        win.blit(playerStandLeft, (x, y))
+    elif rightStand:
+        win.blit(playerStandRight, (x, y))
 
     pygame.display.update()
 
