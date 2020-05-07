@@ -7,7 +7,7 @@ walkRight = [pygame.image.load('assets/right_1.png'), pygame.image.load('assets/
 walkLeft = [pygame.image.load('assets/left_1.png'), pygame.image.load('assets/left_2.png')]
 
 # bg = pygame.image.load('bg.jpg')
-playerStand = pygame.image.load('assets/idle.png')
+playerStand = pygame.image.load('assets/idle_right.png')
 
 clock = pygame.time.Clock()
 
@@ -66,7 +66,7 @@ while run:
         right = False
         animCount = 0
     if not isJump:
-        if keys[pygame.K_SPACE]:
+        if keys[pygame.K_SPACE] or keys[pygame.K_UP]:
             isJump = True
     else:
         if jumpCount >= -10:
