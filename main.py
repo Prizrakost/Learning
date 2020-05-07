@@ -6,7 +6,7 @@ pygame.display.set_caption("Something")
 walkRight = [pygame.image.load('assets/right_1.png'), pygame.image.load('assets/right_2.png')]
 walkLeft = [pygame.image.load('assets/left_1.png'), pygame.image.load('assets/left_2.png')]
 
-# bg = pygame.image.load('bg.jpg')
+bg = pygame.image.load('assets/bg.png')
 playerStandLeft = pygame.image.load('assets/idle_left.png')
 playerStandRight = pygame.image.load('assets/idle_right.png')
 
@@ -30,7 +30,8 @@ animCount = 0
 
 def drawWindow():
     global animCount, leftStand, rightStand
-    win.fill((0, 0, 0))
+    # win.fill((140, 140, 140))
+    win.blit(bg, (0, 0))
     if animCount + 1 >= 10:
         animCount = 0
     if left:
