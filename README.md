@@ -1,2 +1,2 @@
 # Learning
-bg from <a href="https://ru.freepik.com/free-photos-vectors/background">Background вектор создан(а) freepik - ru.freepik.com</a>
+bg from https://ru.freepik.com/free-vector/abstract-pixel-rain-background_6207221.htm
