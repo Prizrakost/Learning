@@ -10,10 +10,12 @@ walkLeft = [pygame.image.load('assets/left_1.png'), pygame.image.load('assets/le
 bg = [pygame.image.load('assets/bg_1.png'), pygame.image.load('assets/bg_2.png')]
 playerStandLeft = pygame.image.load('assets/idle_left.png')
 playerStandRight = pygame.image.load('assets/idle_right.png')
+playerHitLeft = [pygame.image.load('assets/hit_left_1.png'), pygame.image.load('assets/hit_left_2.png')]
+playerHitRight = [pygame.image.load('assets/hit_right_1.png'), pygame.image.load('assets/hit_right_2.png')]
 
 clock = pygame.time.Clock()
 
-width = 36
+width = 48
 height = 64
 x = 250 - width/2
 y = 500 - height
@@ -23,9 +25,11 @@ isJump = False
 jumpCount = 10
 
 left = False
+right = False
 leftStand = False
 rightStand = True
-right = False
+leftHit = False
+rightHit = False
 animCount = 0
 
 if len(sys.argv) > 1:
@@ -56,10 +60,17 @@ def drawWindow():
         animCount += 1
         leftStand = False
         rightStand = True
-    elif leftStand:
-        win.blit(playerStandLeft, (x, y))
-    elif rightStand:
-        win.blit(playerStandRight, (x, y))
+    elif leftHit:
+        win.blit(playerHitLeft[animCount // 5], (x, y))
+        animCount += 1
+    elif rightHit:
+        win.blit(playerHitRight[animCount // 5], (x, y))
+        animCount += 1
+    else:
+        if leftStand:
+            win.blit(playerStandLeft, (x, y))
+        elif rightStand:
+            win.blit(playerStandRight, (x, y))
 
     pygame.display.update()
 
@@ -88,7 +99,7 @@ while run:
         right = False
         animCount = 0
     if not isJump:
-        if keys[pygame.K_SPACE] or keys[pygame.K_UP]:
+        if keys[pygame.K_UP]:
             isJump = True
     else:
         if jumpCount >= -10:
@@ -100,6 +111,17 @@ while run:
         else:
             isJump = False
             jumpCount = 10
+    if keys[pygame.K_SPACE]:
+        if leftStand:
+            leftHit = True
+            rightHit = False
+        elif rightStand:
+            leftHit = False
+            rightHit = True
+    else:
+        leftHit = False
+        rightHit = False
+        animCount = 0
 
     drawWindow()
 
