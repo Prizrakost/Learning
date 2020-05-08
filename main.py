@@ -1,4 +1,5 @@
 import pygame
+import sys
 pygame.init()
 win = pygame.display.set_mode((500, 500))
 pygame.display.set_caption("Something")
@@ -27,6 +28,12 @@ rightStand = True
 right = False
 animCount = 0
 
+if len(sys.argv) > 1:
+    if sys.argv[1] == '-d':
+        fps = int(input('fps: '))
+else:
+    fps = 30
+
 
 def drawWindow():
     global animCount, leftStand, rightStand
@@ -54,7 +61,7 @@ def drawWindow():
 
 run = True
 while run:
-    clock.tick(30)
+    clock.tick(fps)
     # pygame.time.delay(10)
 
     for i in pygame.event.get():
