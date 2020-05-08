@@ -30,7 +30,11 @@ animCount = 0
 
 if len(sys.argv) > 1:
     if sys.argv[1] == '-d':
-        fps = int(input('fps: '))
+        d = sys.argv[2]
+        if d != '':
+            fps = int(d)
+        else:
+            fps = 30
 else:
     fps = 30
 
