@@ -32,6 +32,8 @@ leftHit = False
 rightHit = False
 animCount = 0
 
+fps = 30
+
 if len(sys.argv) > 1:
     if sys.argv[1] == '-d':
         d = sys.argv[2]
@@ -39,11 +41,9 @@ if len(sys.argv) > 1:
             fps = int(d)
         else:
             fps = 30
-else:
-    fps = 30
 
 
-def drawWindow():
+def drawwindow():
     global animCount, leftStand, rightStand
     # win.fill((140, 140, 140))
     win.blit(bg[0], (0, 0))
@@ -123,6 +123,6 @@ while run:
         rightHit = False
         animCount = 0
 
-    drawWindow()
+    drawwindow()
 
 pygame.quit()
