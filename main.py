@@ -15,10 +15,8 @@ clock = pygame.time.Clock()
 
 width = 36
 height = 64
-x = 250 - width/2
-y = 500 - height
-x = int(x)
-y = int(y)
+x = int(250 - width/2)
+y = int(500 - height)
 speed = 10
 
 isJump = False
